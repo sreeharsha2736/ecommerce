@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
+
 import "../main.css";
 
 const Navbar = () => {
@@ -17,10 +18,8 @@ const Navbar = () => {
     window.addEventListener("scroll", listenScrollEvent);
   }, []);
   return (
-    <div>
-      <div id={header} className="container-fluid">
-        <Nav />
-      </div>
+    <div id={header} className="container-fluid">
+      <Nav />
     </div>
   );
 };

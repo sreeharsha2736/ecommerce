@@ -1,20 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Maincontent from "./components/Maincontent";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// import Maincontent from "./components/Maincontent";
 import Navbar from "./components/Navbar";
-import Topheader from "./components/Topheader";
-import Topmenu from "./components/Topmenu";
+import Productscreen from "./components/Screens/Productscreen";
+// import Topheader from "./components/Topheader";
+import Cards from "./components/Cards";
+import Signin from "./components/Screens/Signin";
+// import Topmenu from "./components/Topmenu";
 import "./main.css";
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <div className="main-content">
-          <Topheader />
-          <Topmenu />
-          <Maincontent />
-        </div>
+        <Router>
+          <Switch>
+            <div>
+              <div>
+                {" "}
+                <Navbar />
+              </div>
+
+              <div className="main-content">
+                {/* <Topheader /> */}
+                {/* <Topmenu /> */}
+                <Route path="/product/:id" component={Productscreen} />
+                <Route path="/" exact={true} component={Cards} />
+                <Route path="/signin" component={Signin} />
+
+                {/* <Maincontent /> */}
+              </div>
+            </div>
+          </Switch>
+        </Router>
       </div>
     );
   }

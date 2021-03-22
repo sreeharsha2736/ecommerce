@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "../main.css";
 import { FaShoppingCart } from "react-icons/fa";
 const Nav = () => {
@@ -26,7 +28,7 @@ const Nav = () => {
                 id="home"
                 style={{ textDecoration: "none" }}
               >
-                Home
+                <Link to="/">Home</Link>
               </a>
             </li>
             <li className="pl-5">
@@ -87,7 +89,7 @@ const Nav = () => {
               Search
             </button>
             <div className="pl-5">
-              <h5 className="">Login</h5>
+              <Link to="/Signin">Login</Link>
             </div>
             <div className="pl-5 " style={{ fontSize: "24px" }}>
               <FaShoppingCart />

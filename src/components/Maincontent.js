@@ -6,11 +6,11 @@ const Maincontent = () => {
   return (
     <>
       <div className="row">
-        <div className="col-2">
+        {/* <div className="col-2">
           <Sidemenu />
-        </div>
+        </div> */}
 
-        <div className="col-10">
+        <div className="col-12">
           <Cards />
         </div>
       </div>
