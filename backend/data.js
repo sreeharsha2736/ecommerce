@@ -1,39 +1,57 @@
-let Products = [
+let products = [
   {
     id: 1,
+    brand: "NIKE",
     image: "/images/1.jpg",
     amount: "500rs",
     item: "Jeans shirt",
+    rating: "2.5",
+    countInStock: 6,
   },
   {
     id: 2,
+    brand: "Pepe Jeans",
     image: "/images/2.jpg",
     amount: "600rs",
     item: "Black shirt",
+    rating: "3.5",
+    countInStock: 7,
   },
   {
     id: 3,
+    brand: "Max",
     image: "/images/3.jpg",
     amount: "700rs",
     item: "Red shirt",
+    rating: "4.5",
+    countInStock: 6,
   },
   {
     id: 4,
+    brand: "Indian Terrain",
     image: "/images/5.jpg",
     amount: "700rs",
     item: "Black shirt",
+    rating: "3.5",
+    countInStock: 6,
   },
   {
     id: 5,
+    brand: "Max",
     image: "/images/3.jpg",
     amount: "700rs",
     item: "Denim shirt",
+    rating: "4.5",
+    countInStock: 8,
   },
   {
     id: 6,
+    brand: "Nike",
     image: "/images/1.jpg",
     amount: "700rs",
     item: "Pink shirt",
+    rating: "2.5",
+    countInStock: 9,
   },
 ];
-export default Products;
+export default products;

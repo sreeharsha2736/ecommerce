@@ -1,8 +1,12 @@
 import express from "express";
-import Products from "./data.js";
+import products from "./data.js";
 const app = express();
 
 app.get("/products", (req, res) => {
-  res.send(Products);
+  res.send(products);
+});
+app.get("/products/:id", (req, res) => {
+  const productId = req.params.id;
+  res.send(products.find((x) => x.id == productId));
 });
 app.listen(5000, () => console.log("sever started"));

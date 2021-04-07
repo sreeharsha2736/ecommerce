@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-// import Maincontent from "./components/Maincontent";
+import { Provider } from "react-redux";
 import Navbar from "./components/Navbar";
-import Productscreen from "./components/Screens/Productscreen";
-// import Topheader from "./components/Topheader";
+import Productscreen from "./Screens/Productscreen";
 import Cards from "./components/Cards";
-import Signin from "./components/Screens/Signin";
-// import Topmenu from "./components/Topmenu";
+import Signin from "./Screens/Signin";
 import "./main.css";
+import store from "./store";
 class App extends React.Component {
   render() {
     return (
@@ -20,16 +18,9 @@ class App extends React.Component {
               {" "}
               <Navbar />
             </div>
-
-            <div className="main-content">
-              {/* <Topheader /> */}
-              {/* <Topmenu /> */}
-
-              {/* <Maincontent /> */}
-            </div>
           </div>
           <Switch>
-            <Route path="/product/:id" component={Productscreen} />
+            <Route path="/products/:id" component={Productscreen} />
             <Route path="/" exact={true} component={Cards} />
             <Route path="/signin" component={Signin} />
           </Switch>
@@ -38,4 +29,9 @@ class App extends React.Component {
     );
   }
 }
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);

@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../actions/productActions";
+
 const Card = () => {
-  const [products, setProducts] = useState([]);
+  const productList = useSelector((state) => state.productList);
+  const { products, loading, error } = productList;
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/products");
-      setProducts(data);
-    };
-    fetchData();
+    dispatch(listProducts());
   }, []);
-  return (
+  console.log(products);
+  return loading ? (
+    <div>Loading...</div>
+  ) : error ? (
+    <div>{error}</div>
+  ) : (
     <>
       {products.map((product) => (
         <div key={product.id} className="col-md-4  col-sm-6 p-5">
@@ -26,7 +32,7 @@ const Card = () => {
               <div className="row justify-content-around">
                 <span className="card-text">{product.amount}</span>
                 <span className="">
-                  <Link to={"/product/" + product.id} className="  ">
+                  <Link to={"/products/" + product.id} className="  ">
                     Buynow
                   </Link>
                 </span>
