@@ -8,9 +8,10 @@ const Productscreen = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsProduct(props.match.params.id));
-    return () => {};
   }, []);
-  console.log(product);
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty" + qty);
+  };
   return loading ? (
     "...loading"
   ) : error ? (
@@ -26,7 +27,7 @@ const Productscreen = (props) => {
               <div className="">
                 <h4 className=""> {product.item}</h4>
                 <h5 className=""> Price : {product.amount}</h5>
-                <h5 className=""> Ratings : 2.5 / 5</h5>
+                <h5 className=""> Ratings : {product.rating}/ 5</h5>
               </div>
             </div>
           </div>
@@ -36,31 +37,35 @@ const Productscreen = (props) => {
             <div>
               <div className="">
                 <h5 className=""> Price : {product.amount}</h5>
-                <h5 className=""> Ratings : 2.5 / 5</h5>
-                <p className=""> State : In stock</p>
+                <h5 className=""> Ratings : {product.rating} / 5</h5>
                 Qty :
                 <select
-                  class="form-select form-select-sm"
+                  className="form-select form-select-sm"
                   aria-label=".form-select-sm example"
                   value={qty}
                   onChange={(e) => setQty(e.target.value)}
                 >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
+                  {[...Array(product.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
+
             <div className=" ">
-              <button className="btn btn-warning ">Buy Now</button>
-            </div>
-            <div className=" ">
-              <button
-                className="btn btn-danger
-           "
-              >
-                Add to cart
-              </button>
+              <div>
+                <p>
+                  Status:
+                  {product.countInStock < 1 ? " Un available" : " In Stock"}
+                </p>
+              </div>
+              {product.countInStock > 1 && (
+                <button className="btn btn-warning" onClick={handleAddToCart}>
+                  Add to cart
+                </button>
+              )}
             </div>
           </div>
         </div>

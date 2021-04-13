@@ -8,6 +8,7 @@ import Cards from "./components/Cards";
 import Signin from "./Screens/Signin";
 import "./main.css";
 import store from "./store";
+import CartScreen from "./Screens/CartScreen";
 class App extends React.Component {
   render() {
     return (
@@ -23,6 +24,7 @@ class App extends React.Component {
             <Route path="/products/:id" component={Productscreen} />
             <Route path="/" exact={true} component={Cards} />
             <Route path="/signin" component={Signin} />
+            <Route path="/cart/:id?" component={CartScreen} />
           </Switch>
         </Router>
       </div>
