@@ -11,7 +11,6 @@ const Card = () => {
   useEffect(() => {
     dispatch(listProducts());
   }, []);
-  console.log(products);
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
