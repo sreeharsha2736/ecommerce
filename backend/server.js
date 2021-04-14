@@ -1,7 +1,24 @@
 import express from "express";
 import products from "./data.js";
-const app = express();
+import dotenv from "dotenv";
+import config from "./config.js";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import userRoute from "./routes/userRoute.js";
+dotenv.config();
 
+const mongodbUrl = config.MONGODB_URL;
+mongoose
+  .connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .catch((error) => console.log(error.reason));
+
+const app = express();
+app.use(bodyParser.json());
+app.use("/api/users", userRoute);
 app.get("/products", (req, res) => {
   res.send(products);
 });

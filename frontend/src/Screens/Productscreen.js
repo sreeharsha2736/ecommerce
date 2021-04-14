@@ -12,6 +12,7 @@ const Productscreen = (props) => {
   const handleAddToCart = () => {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
   };
+
   return loading ? (
     "...loading"
   ) : error ? (

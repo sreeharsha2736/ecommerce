@@ -1,67 +1,87 @@
-import React, { useState } from "react";
-import Register from "./Register";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "../actions/userActions";
+const Signin = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const userSignin = useSelector((state) => state.userSignin);
+  const { loading, error, userInfo } = userSignin;
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
 
-const Signin = () => {
-  const [signin, setSignin] = useState("false");
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+    return () => {
+      //
+    };
+  }, [userInfo]);
   return (
     <>
       <div className="pt-5">
-        {signin == "false" ? (
-          <div>
-            <Register />
-            <div className="row  justify-content-center">
-              Already have an account,
-              <a href="#" onClick={() => setSignin("true")}>
-                Log in
-              </a>
-            </div>
-          </div>
-        ) : (
-          <div class=" pt-5 ">
-            <div class="row justify-content-center">
-              <div class=" col-5 border">
-                <div class=" p-4 ">
-                  <h2 class=" text-center">Sign in Form</h2>
-                  <div class=" py-md-4">
-                    <form>
-                      <div class="form-group">
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="email"
-                          name="email"
-                          placeholder="Email"
-                        />
-                      </div>
-
-                      <div class="form-group">
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="password"
-                          name="password"
-                          placeholder="Password"
-                        />
-                      </div>
-                    </form>
-                  </div>
-                  <p>
-                    {" "}
-                    Don't have an account,{" "}
-                    <a href="#" onClick={() => setSignin("false")}>
-                      sign in
-                    </a>
-                  </p>
-                  <div class="mx-auto">
-                    <button class="btn btn-primary" type="submit" name="submit">
-                      Login
-                    </button>
-                  </div>
+        <div className=" pt-5 ">
+          <div className="row justify-content-center">
+            <div className=" col-5 border">
+              <div className=" p-4 ">
+                <h2 className=" text-center">Sign in Form</h2>
+                <div className=" py-md-4">
+                  <form onSubmit={submitHandler}>
+                    {loading && <div>Loading ....</div>}
+                    {error && <div>{error}</div>}
+                    <div className="form-group">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <div className="mx-auto">
+                      <button className="btn btn-primary" type="submit">
+                        Login
+                      </button>
+                    </div>
+                  </form>
                 </div>
+                <p>
+                  {" "}
+                  Don't have an account,{" "}
+                  <Link
+                    to={
+                      redirect === "/"
+                        ? "register"
+                        : "register?redirect=" + redirect
+                    }
+                  >
+                    Sign up
+                  </Link>
+                </p>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </>
   );

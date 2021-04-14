@@ -26,6 +26,7 @@ function CartScreen(props) {
   const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
   };
+  console.log(cartItems);
   return (
     <div className="cart pl-2 my-5">
       <div className="cart-list ">
