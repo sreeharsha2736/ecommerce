@@ -7,8 +7,8 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import userRoute from "./routes/userRoute.js";
 dotenv.config();
-const __dirname =
-  "https://624de6ea9e4997075c5ea8f5--lively-platypus-c8e92d.netlify.app";
+const __dirname = path.resolve();
+
 var app = express();
 const mongodbUrl = config.MONGODB_URL;
 mongoose
