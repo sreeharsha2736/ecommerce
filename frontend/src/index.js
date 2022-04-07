@@ -25,6 +25,7 @@ class App extends React.Component {
             <Route path="/products/:id" component={Productscreen} />
             <Route path="/" exact={true} component={Cards} />
             <Route path="/signin" component={Signin} />
+            <Route path="/logout" component={Signin} />
             <Route path="/register" component={Register} />
             <Route path="/cart/:id?" component={CartScreen} />
           </Switch>

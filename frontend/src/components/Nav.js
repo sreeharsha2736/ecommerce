@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
+import { logout } from "../actions/userActions";
 import "../main.css";
 import { FaShoppingCart } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 const Nav = (props) => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    props.history.push("/signin");
+  };
   return (
     <>
       <nav className=" ">
@@ -21,7 +26,7 @@ const Nav = (props) => {
                   id="home"
                   style={{ textDecoration: "none" }}
                 >
-                  Home
+                  MyEcommerce-Home
                 </Link>
               </li>
             </ul>
@@ -29,7 +34,13 @@ const Nav = (props) => {
           <span className="col-2">
             <div className="d-flex   pt-3">
               {userInfo ? (
-                <Link to="/profile">{userInfo.name}</Link>
+                <div>
+                  <Link to="/profile">{userInfo.name}</Link>
+                  <button onClick={() => handleLogout()}>
+                    {" "}
+                    <Link to="/logout">Logout </Link>
+                  </button>
+                </div>
               ) : (
                 <>
                   <Link to="/signin">Sign In</Link>{" "}
