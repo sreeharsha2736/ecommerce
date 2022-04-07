@@ -24,6 +24,9 @@ const Register = (props) => {
     if (userInfo) {
       props.history.push(redirect);
     }
+    return () => {
+      //
+    };
   }, [userInfo]);
   return (
     <>
@@ -34,7 +37,8 @@ const Register = (props) => {
               <h2 className="card-title text-center">Sign in Form</h2>
               <div className="card-body py-md-4">
                 <form onSubmit={submitHandler}>
-                  {loading && <div>Loading...</div>}
+                  <div>Welcome!!! Please create your credentials</div>
+                  {loading && <div>Creating Credentials...</div>}
                   {error && <div>{error}</div>}
                   <div className="form-group">
                     <input

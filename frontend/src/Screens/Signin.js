@@ -35,7 +35,13 @@ const Signin = (props) => {
                 <div className=" py-md-4">
                   <form onSubmit={submitHandler}>
                     {loading && <div>Loading ....</div>}
-                    {error && <div>{error}</div>}
+                    {error && (
+                      <div>
+                        {error.includes("401")
+                          ? "invalid Credentials..."
+                          : error}
+                      </div>
+                    )}
                     <div className="form-group">
                       <input
                         type="email"
